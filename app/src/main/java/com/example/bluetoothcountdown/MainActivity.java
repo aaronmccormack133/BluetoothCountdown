@@ -4,12 +4,15 @@ import android.bluetooth.BluetoothAdapter;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends Activity {
 
@@ -18,6 +21,8 @@ public class MainActivity extends Activity {
     private TextView mTextField;
     private Button turnOff;
     private CountDownTimer countDownTimer;
+    private EditText editHour;
+    private EditText editMin;
 
 
     @Override
@@ -27,6 +32,8 @@ public class MainActivity extends Activity {
 
         turnOff = (Button) findViewById(R.id.toggle);
         mTextField = (TextView) findViewById(R.id.displayTimer);
+        editHour = (EditText) findViewById(R.id.timePickerHour);
+        editMin = (EditText) findViewById(R.id.timePickerMin);
 
         turnOff.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,10 +50,18 @@ public class MainActivity extends Activity {
     }
 
     public void countDown(){
-        countDownTimer = new CountDownTimer(30000, 1000) {
+        String hourTime = editHour.getText().toString();
+        String minTime = editMin.getText().toString();
+        int hour = Integer.parseInt(hourTime);
+        int min = Integer.parseInt(minTime);
+        long hourInMillis = TimeUnit.HOURS.toMillis(hour);
+        long minInMillis = TimeUnit.MINUTES.toMillis(min);
+        long finalTime = hourInMillis + minInMillis;
+
+        countDownTimer = new CountDownTimer(finalTime, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                mTextField.setText("Time remaining: " + millisUntilFinished / 1000);
+                mTextField.setText(""  + millisUntilFinished / 1000);
             }
 
             @Override
