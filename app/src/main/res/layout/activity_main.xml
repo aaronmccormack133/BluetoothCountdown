@@ -13,13 +13,23 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/timePicker"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/displayTimer"
+        android:text="00:00"
+        android:textSize="36dp"
+        />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Turn Off"
         android:id="@+id/toggle"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/timePicker"
+        android:layout_below="@+id/displayTimer"
         />
 
 </RelativeLayout>
