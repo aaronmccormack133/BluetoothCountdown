@@ -2,19 +2,17 @@ package com.example.bluetoothcountdown;
 
 import android.bluetooth.BluetoothAdapter;
 import android.os.Bundle;
-import android.app.Activity;
 import android.os.CountDownTimer;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
     private final BluetoothAdapter bAdapter = BluetoothAdapter.getDefaultAdapter();
 
@@ -52,6 +50,13 @@ public class MainActivity extends Activity {
     public void countDown(){
         String hourTime = editHour.getText().toString();
         String minTime = editMin.getText().toString();
+
+        if(hourTime.isEmpty()){
+            hourTime = "0";
+        }
+        else if(minTime.isEmpty()){
+            minTime = "0";
+        }
         int hour = Integer.parseInt(hourTime);
         int min = Integer.parseInt(minTime);
         long hourInMillis = TimeUnit.HOURS.toMillis(hour);
